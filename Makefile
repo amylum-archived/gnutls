@@ -12,6 +12,12 @@ PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/gnutls
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
+GMP_VERSION = 6.1.0-1
+GMP_URL = https://github.com/amylum/gmp/releases/download/$(GMP_VERSION)/gmp.tar.gz
+GMP_TAR = /tmp/gmp.tar.gz
+GMP_DIR = /tmp/gmp
+GMP_PATH = -I$(GMP_DIR)/usr/include -L$(GMP_DIR)/usr/lib
+
 .PHONY : default submodule deps manual container deps build version push local
 
 default: submodule container
@@ -26,6 +32,10 @@ container:
 	./meta/launch
 
 deps:
+	rm -rf $(GMP_DIR) $(GMP_TAR)
+	mkdir $(GMP_DIR)
+	curl -sLo $(GMP_TAR) $(GMP_URL)
+	tar -x -C $(GMP_DIR) -f $(GMP_TAR)
 
 build: submodule deps
 	rm -rf $(BUILD_DIR)
