@@ -5,7 +5,7 @@ BUILD_DIR = /tmp/$(PACKAGE)-build
 RELEASE_DIR = /tmp/$(PACKAGE)-release
 RELEASE_FILE = /tmp/$(PACKAGE).tar.gz
 PATH_FLAGS = --prefix=/usr --infodir=/tmp/trash
-CONF_FLAGS = --without-idn
+CONF_FLAGS = --without-idn --disable-shared
 CFLAGS = -static -static-libgcc -Wl,-static -lc
 
 PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/gnutls_//;s/_/./g')
