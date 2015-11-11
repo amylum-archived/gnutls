@@ -30,17 +30,20 @@ LIBTASN1_TAR = /tmp/libtasn1.tar.gz
 LIBTASN1_DIR = /tmp/libtasn1
 LIBTASN1_PATH = -I$(LIBTASN1_DIR)/usr/include -L$(LIBTASN1_DIR)/usr/lib
 
-.PHONY : default submodule deps manual container deps build version push local
+.PHONY : default submodule build_container deps manual container deps build version push local
 
 default: submodule container
 
 submodule:
 	git submodule update --init
 
-manual: submodule
+build_container:
+	docker build -t gnutls-pkg meta
+
+manual: submodule build_container
 	./meta/launch /bin/bash || true
 
-container:
+container: build_container
 	./meta/launch
 
 deps:
