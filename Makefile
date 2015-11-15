@@ -5,8 +5,8 @@ BUILD_DIR = /tmp/$(PACKAGE)-build
 RELEASE_DIR = /tmp/$(PACKAGE)-release
 RELEASE_FILE = /tmp/$(PACKAGE).tar.gz
 PATH_FLAGS = --prefix=/usr --infodir=/tmp/trash
-CONF_FLAGS = --without-idn --disable-shared --enable-local-libopts --disable-libopts-install
-CFLAGS = -static -static-libgcc -Wl,-static -lc
+CONF_FLAGS = --without-idn --disable-shared
+CFLAGS = -static -static-libgcc -Wl,-static
 
 PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/gnutls_//;s/_/./g')
 PATCH_VERSION = $$(cat version)
@@ -18,7 +18,7 @@ GMP_TAR = /tmp/gmp.tar.gz
 GMP_DIR = /tmp/gmp
 GMP_PATH = -I$(GMP_DIR)/usr/include -L$(GMP_DIR)/usr/lib
 
-NETTLE_VERSION = 3.1.1-1
+NETTLE_VERSION = 3.1.1-2
 NETTLE_URL = https://github.com/amylum/nettle/releases/download/$(NETTLE_VERSION)/nettle.tar.gz
 NETTLE_TAR = /tmp/nettle.tar.gz
 NETTLE_DIR = /tmp/nettle
