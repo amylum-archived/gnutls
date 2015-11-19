@@ -69,6 +69,7 @@ deps:
 	mkdir $(AUTOGEN_DIR)
 	curl -sLo $(AUTOGEN_TAR) $(AUTOGEN_URL)
 	tar -x -C $(AUTOGEN_DIR) -f $(AUTOGEN_TAR)
+	rm /tmp/autogen/usr/lib/libopts.la
 
 build: submodule deps
 	rm -rf $(BUILD_DIR)
