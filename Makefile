@@ -30,7 +30,7 @@ LIBTASN1_TAR = /tmp/libtasn1.tar.gz
 LIBTASN1_DIR = /tmp/libtasn1
 LIBTASN1_PATH = -I$(LIBTASN1_DIR)/usr/include -L$(LIBTASN1_DIR)/usr/lib
 
-AUTOGEN_VERSION = 6.1.0-1
+AUTOGEN_VERSION = 5.18.6-1
 AUTOGEN_URL = https://github.com/amylum/autogen/releases/download/$(AUTOGEN_VERSION)/autogen.tar.gz
 AUTOGEN_TAR = /tmp/autogen.tar.gz
 AUTOGEN_DIR = /tmp/autogen
