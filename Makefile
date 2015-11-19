@@ -36,12 +36,6 @@ AUTOGEN_TAR = /tmp/autogen.tar.gz
 AUTOGEN_DIR = /tmp/autogen
 AUTOGEN_PATH = -I$(AUTOGEN_DIR)/usr/include -L$(AUTOGEN_DIR)/usr/lib
 
-LIBFFI_VERSION = 3.2.1-1
-LIBFFI_URL = https://github.com/amylum/libffi/releases/download/$(LIBFFI_VERSION)/libffi.tar.gz
-LIBFFI_TAR = /tmp/libffi.tar.gz
-LIBFFI_DIR = /tmp/libffi
-LIBFFI_PATH = -I$(LIBFFI_DIR)/usr/lib/libffi-$(word 1, $(subst -, ,$(LIBFFI_VERSION)))/include -L$(LIBFFI_DIR)/usr/lib -lffi
-
 .PHONY : default submodule build_container deps manual container deps build version push local
 
 default: submodule container
@@ -76,16 +70,12 @@ deps:
 	curl -sLo $(AUTOGEN_TAR) $(AUTOGEN_URL)
 	tar -x -C $(AUTOGEN_DIR) -f $(AUTOGEN_TAR)
 	rm /tmp/autogen/usr/lib/libopts.la
-	rm -rf $(LIBFFI_DIR) $(LIBFFI_TAR)
-	mkdir $(LIBFFI_DIR)
-	curl -sLo $(LIBFFI_TAR) $(LIBFFI_URL)
-	tar -x -C $(LIBFFI_DIR) -f $(LIBFFI_TAR)
 
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && make autoreconf
-	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(LIBFFI_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
+	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
 	cd $(BUILD_DIR) && make DESTDIR=$(RELEASE_DIR) install
 	rm -rf $(RELEASE_DIR)/tmp
 	mkdir -p $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)
