@@ -24,7 +24,7 @@ NETTLE_TAR = /tmp/nettle.tar.gz
 NETTLE_DIR = /tmp/nettle
 NETTLE_PATH = -I$(NETTLE_DIR)/usr/include -L$(NETTLE_DIR)/usr/lib
 
-LIBTASN1_VERSION = 4.7-1
+LIBTASN1_VERSION = 4.7-2
 LIBTASN1_URL = https://github.com/amylum/libtasn1/releases/download/$(LIBTASN1_VERSION)/libtasn1.tar.gz
 LIBTASN1_TAR = /tmp/libtasn1.tar.gz
 LIBTASN1_DIR = /tmp/libtasn1
@@ -36,6 +36,12 @@ AUTOGEN_TAR = /tmp/autogen.tar.gz
 AUTOGEN_DIR = /tmp/autogen
 AUTOGEN_PATH = -I$(AUTOGEN_DIR)/usr/include -L$(AUTOGEN_DIR)/usr/lib
 export PATH := $(AUTOGEN_DIR)/usr/bin:$(PATH)
+
+P11-KIT_VERSION = 0.23.1-1
+P11-KIT_URL = https://github.com/amylum/p11-kit/releases/download/$(P11-KIT_VERSION)/p11-kit.tar.gz
+P11-KIT_TAR = /tmp/p11-kit.tar.gz
+P11-KIT_DIR = /tmp/p11-kit
+P11-KIT_PATH = -I$(P11-KIT_DIR)/usr/include -L$(P11-KIT_DIR)/usr/lib
 
 .PHONY : default submodule build_container deps manual container deps build version push local
 
@@ -71,12 +77,16 @@ deps:
 	curl -sLo $(AUTOGEN_TAR) $(AUTOGEN_URL)
 	tar -x -C $(AUTOGEN_DIR) -f $(AUTOGEN_TAR)
 	rm /tmp/autogen/usr/lib/libopts.la
+	rm -rf $(P11-KIT_DIR) $(P11-KIT_TAR)
+	mkdir $(P11-KIT_DIR)
+	curl -sLo $(P11-KIT_TAR) $(P11-KIT_URL)
+	tar -x -C $(P11-KIT_DIR) -f $(P11-KIT_TAR)
 
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && make autoreconf
-	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
+	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
 	cd $(BUILD_DIR) && make DESTDIR=$(RELEASE_DIR) install
 	rm -rf $(RELEASE_DIR)/tmp
 	mkdir -p $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)
