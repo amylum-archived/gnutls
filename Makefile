@@ -41,7 +41,7 @@ P11-KIT_VERSION = 0.23.1-1
 P11-KIT_URL = https://github.com/amylum/p11-kit/releases/download/$(P11-KIT_VERSION)/p11-kit.tar.gz
 P11-KIT_TAR = /tmp/p11-kit.tar.gz
 P11-KIT_DIR = /tmp/p11-kit
-P11-KIT_PATH = -I$(P11-KIT_DIR)/usr/include -L$(P11-KIT_DIR)/usr/lib
+P11-KIT_PATH = -I$(P11-KIT_DIR)/usr/include -L$(P11-KIT_DIR)/usr/lib -lpthread -ldl
 
 .PHONY : default submodule build_container deps manual container deps build version push local
 
@@ -87,6 +87,7 @@ build: submodule deps
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && make autoreconf
 	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
+	cd $(BUILD_DIR) && make
 	cd $(BUILD_DIR) && make DESTDIR=$(RELEASE_DIR) install
 	rm -rf $(RELEASE_DIR)/tmp
 	mkdir -p $(RELEASE_DIR)/usr/share/licenses/$(PACKAGE)
