@@ -110,6 +110,7 @@ deps:
 	mkdir $(GUILE_DIR)
 	curl -sLo $(GUILE_TAR) $(GUILE_URL)
 	tar -x -C $(GUILE_DIR) -f $(GUILE_TAR)
+	rm /tmp/guile/usr/lib/libguile-2.0.la
 	rm -rf $(GC_DIR) $(GC_TAR)
 	mkdir $(GC_DIR)
 	curl -sLo $(GC_TAR) $(GC_URL)
