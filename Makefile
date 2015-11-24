@@ -66,6 +66,12 @@ LIBFFI_TAR = /tmp/libffi.tar.gz
 LIBFFI_DIR = /tmp/libffi
 LIBFFI_PATH = -I$(LIBFFI_DIR)/usr/lib/libffi-3.2.1/include -L$(LIBFFI_DIR)/usr/lib
 
+LIBTOOL_VERSION = 2.4.6-1
+LIBTOOL_URL = https://github.com/amylum/libtool/releases/download/$(LIBTOOL_VERSION)/libtool.tar.gz
+LIBTOOL_TAR = /tmp/libtool.tar.gz
+LIBTOOL_DIR = /tmp/libtool
+LIBTOOL_PATH = -I$(LIBTOOL_DIR)/usr/include -L$(LIBTOOL_DIR)/usr/lib
+
 export PATH := $(AUTOGEN_DIR)/usr/bin:$(GUILE_DIR)/usr/bin:$(PATH)
 
 .PHONY : default submodule build_container deps manual container deps build version push local
@@ -124,12 +130,16 @@ deps:
 	mkdir $(LIBFFI_DIR)
 	curl -sLo $(LIBFFI_TAR) $(LIBFFI_URL)
 	tar -x -C $(LIBFFI_DIR) -f $(LIBFFI_TAR)
+	rm -rf $(LIBTOOL_DIR) $(LIBTOOL_TAR)
+	mkdir $(LIBTOOL_DIR)
+	curl -sLo $(LIBTOOL_TAR) $(LIBTOOL_URL)
+	tar -x -C $(LIBTOOL_DIR) -f $(LIBTOOL_TAR)
 
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && make autoreconf
-	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' LIBS='-lunistring -lgmp -lffi' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
+	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' LIBS='-lunistring -lgmp -lffi' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH) $(LIBTOOL_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
 	cd $(BUILD_DIR) && make
 	cd $(BUILD_DIR) && make DESTDIR=$(RELEASE_DIR) install
 	rm -rf $(RELEASE_DIR)/tmp
