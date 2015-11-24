@@ -5,7 +5,7 @@ BUILD_DIR = /tmp/$(PACKAGE)-build
 RELEASE_DIR = /tmp/$(PACKAGE)-release
 RELEASE_FILE = /tmp/$(PACKAGE).tar.gz
 PATH_FLAGS = --prefix=/usr --infodir=/tmp/trash
-CONF_FLAGS = --without-idn --disable-shared --disable-local-libopts --enable-guile --with-guile-site-dir=no
+CONF_FLAGS = --without-idn --disable-shared --disable-local-libopts --enable-guile --with-guile-site-dir=no --with-zlib
 CFLAGS = -static -static-libgcc -Wl,-static
 
 PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/gnutls_//;s/_/./g')
@@ -72,6 +72,12 @@ LIBTOOL_TAR = /tmp/libtool.tar.gz
 LIBTOOL_DIR = /tmp/libtool
 LIBTOOL_PATH = -I$(LIBTOOL_DIR)/usr/include -L$(LIBTOOL_DIR)/usr/lib
 
+ZLIB_VERSION = 1.2.8-1
+ZLIB_URL = https://github.com/amylum/zlib/releases/download/$(ZLIB_VERSION)/zlib.tar.gz
+ZLIB_TAR = /tmp/zlib.tar.gz
+ZLIB_DIR = /tmp/zlib
+ZLIB_PATH = -I$(ZLIB_DIR)/usr/include -L$(ZLIB_DIR)/usr/lib
+
 export PATH := $(AUTOGEN_DIR)/usr/bin:$(GUILE_DIR)/usr/bin:$(PATH)
 
 .PHONY : default submodule build_container deps manual container deps build version push local
@@ -134,13 +140,17 @@ deps:
 	mkdir $(LIBTOOL_DIR)
 	curl -sLo $(LIBTOOL_TAR) $(LIBTOOL_URL)
 	tar -x -C $(LIBTOOL_DIR) -f $(LIBTOOL_TAR)
+	rm -rf $(ZLIB_DIR) $(ZLIB_TAR)
+	mkdir $(ZLIB_DIR)
+	curl -sLo $(ZLIB_TAR) $(ZLIB_URL)
+	tar -x -C $(ZLIB_DIR) -f $(ZLIB_TAR)
 
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
-	echo "echo -n '$(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH) $(LIBTOOL_PATH) -lltdl -ldl -lgc -lunistring -lgmp -lffi'" > $(GUILE_DIR)/usr/bin/guile-config
+	echo "echo -n '$(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH) $(LIBTOOL_PATH) $(ZLIB_PATH) -lltdl -ldl -lgc -lunistring -lgmp -lffi -lz'" > $(GUILE_DIR)/usr/bin/guile-config
 	cd $(BUILD_DIR) && make autoreconf
-	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' LIBS='-lunistring -lgmp -lffi' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH) $(LIBTOOL_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
+	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' LIBS='-lunistring -lgmp -lffi' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH) $(LIBTOOL_PATH) $(ZLIB_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
 	cd $(BUILD_DIR) && make
 	cd $(BUILD_DIR) && make DESTDIR=$(RELEASE_DIR) install
 	rm -rf $(RELEASE_DIR)/tmp
