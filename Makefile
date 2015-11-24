@@ -84,17 +84,14 @@ ZLIB_PATH = -I$(ZLIB_DIR)/usr/include -L$(ZLIB_DIR)/usr/lib
 
 export PATH := $(AUTOGEN_DIR)/usr/bin:$(GUILE_DIR)/usr/bin:$(PATH)
 
-.PHONY : default submodule build_container source deps manual container deps build version push local
+.PHONY : default build_container source deps manual container deps build version push local
 
-default: submodule container
-
-submodule:
-	git submodule update --init
+default: container
 
 build_container:
 	docker build -t gnutls-pkg meta
 
-manual: submodule build_container
+manual: build_container
 	./meta/launch /bin/bash || true
 
 container: build_container
@@ -155,7 +152,7 @@ deps:
 	curl -sLo $(ZLIB_TAR) $(ZLIB_URL)
 	tar -x -C $(ZLIB_DIR) -f $(ZLIB_TAR)
 
-build: submodule deps
+build: source deps
 	rm -rf $(BUILD_DIR)
 	cp -R $(SOURCE_PATH) $(BUILD_DIR)
 	echo "echo -n '$(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH) $(LIBTOOL_PATH) $(ZLIB_PATH) -lltdl -ldl -lgc -lunistring -lgmp -lffi -lz'" > $(GUILE_DIR)/usr/bin/guile-config
