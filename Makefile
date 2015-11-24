@@ -47,7 +47,8 @@ GUILE_VERSION = 2.0.11-2
 GUILE_URL = https://github.com/amylum/guile/releases/download/$(GUILE_VERSION)/guile.tar.gz
 GUILE_TAR = /tmp/guile.tar.gz
 GUILE_DIR = /tmp/guile
-GUILE_PATH = -I$(GUILE_DIR)/usr/include -L$(GUILE_DIR)/usr/lib
+GUILE_PATH = -I$(GUILE_DIR)/usr/include -L$(GUILE_DIR)/usr/lib -lguile-2.0
+export PATH := $(GUILE_DIR)/usr/bin:$(PATH)
 
 GC_VERSION = 7.4.2-2
 GC_URL = https://github.com/amylum/gc/releases/download/$(GC_VERSION)/gc.tar.gz
