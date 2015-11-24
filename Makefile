@@ -12,7 +12,7 @@ PACKAGE_VERSION = 3.4.7
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
-SOURCE_URL = http://ftp.gnutls.org/gcrypt/gnutls/v3.4/$(PACKAGE)-$(PACKAGE_VERSION).tar.xz
+SOURCE_URL = ftp://ftp.gnutls.org/gcrypt/gnutls/v3.4/$(PACKAGE)-$(PACKAGE_VERSION).tar.xz
 SOURCE_PATH = /tmp/source
 SOURCE_TARBALL = /tmp/source.tar.gz
 
