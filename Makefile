@@ -35,7 +35,6 @@ AUTOGEN_URL = https://github.com/amylum/autogen/releases/download/$(AUTOGEN_VERS
 AUTOGEN_TAR = /tmp/autogen.tar.gz
 AUTOGEN_DIR = /tmp/autogen
 AUTOGEN_PATH = -I$(AUTOGEN_DIR)/usr/include -L$(AUTOGEN_DIR)/usr/lib
-export PATH := $(AUTOGEN_DIR)/usr/bin:$(PATH)
 
 P11-KIT_VERSION = 0.23.1-1
 P11-KIT_URL = https://github.com/amylum/p11-kit/releases/download/$(P11-KIT_VERSION)/p11-kit.tar.gz
@@ -48,7 +47,6 @@ GUILE_URL = https://github.com/amylum/guile/releases/download/$(GUILE_VERSION)/g
 GUILE_TAR = /tmp/guile.tar.gz
 GUILE_DIR = /tmp/guile
 GUILE_PATH = -I$(GUILE_DIR)/usr/include -L$(GUILE_DIR)/usr/lib -lguile-2.0
-export PATH := $(GUILE_DIR)/usr/bin:$(PATH)
 
 GC_VERSION = 7.4.2-2
 GC_URL = https://github.com/amylum/gc/releases/download/$(GC_VERSION)/gc.tar.gz
@@ -67,6 +65,8 @@ LIBFFI_URL = https://github.com/amylum/libffi/releases/download/$(LIBFFI_VERSION
 LIBFFI_TAR = /tmp/libffi.tar.gz
 LIBFFI_DIR = /tmp/libffi
 LIBFFI_PATH = -I$(LIBFFI_DIR)/usr/lib/libffi-3.2.1/include -L$(LIBFFI_DIR)/usr/lib
+
+export PATH := $(AUTOGEN_DIR)/usr/bin:$(GUILE_DIR)/usr/bin:$(PATH)
 
 .PHONY : default submodule build_container deps manual container deps build version push local
 
