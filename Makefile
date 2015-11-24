@@ -55,6 +55,12 @@ GC_TAR = /tmp/gc.tar.gz
 GC_DIR = /tmp/gc
 GC_PATH = -I$(GC_DIR)/usr/include -L$(GC_DIR)/usr/lib
 
+LIBUNISTRING_VERSION = 0.9.6-1
+LIBUNISTRING_URL = https://github.com/amylum/libunistring/releases/download/$(LIBUNISTRING_VERSION)/libunistring.tar.gz
+LIBUNISTRING_TAR = /tmp/libunistring.tar.gz
+LIBUNISTRING_DIR = /tmp/libunistring
+LIBUNISTRING_PATH = -I$(LIBUNISTRING_DIR)/usr/include -L$(LIBUNISTRING_DIR)/usr/lib
+
 .PHONY : default submodule build_container deps manual container deps build version push local
 
 default: submodule container
@@ -102,12 +108,16 @@ deps:
 	curl -sLo $(GC_TAR) $(GC_URL)
 	tar -x -C $(GC_DIR) -f $(GC_TAR)
 	rm /tmp/gc/usr/lib/libgc.la
+	rm -rf $(LIBUNISTRING_DIR) $(LIBUNISTRING_TAR)
+	mkdir $(LIBUNISTRING_DIR)
+	curl -sLo $(LIBUNISTRING_TAR) $(LIBUNISTRING_URL)
+	tar -x -C $(LIBUNISTRING_DIR) -f $(LIBUNISTRING_TAR)
 
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && make autoreconf
-	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
+	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
 	cd $(BUILD_DIR) && make
 	cd $(BUILD_DIR) && make DESTDIR=$(RELEASE_DIR) install
 	rm -rf $(RELEASE_DIR)/tmp
