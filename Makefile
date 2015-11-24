@@ -49,6 +49,12 @@ GUILE_TAR = /tmp/guile.tar.gz
 GUILE_DIR = /tmp/guile
 GUILE_PATH = -I$(GUILE_DIR)/usr/include -L$(GUILE_DIR)/usr/lib
 
+GC_VERSION = 7.4.2-2
+GC_URL = https://github.com/amylum/gc/releases/download/$(GC_VERSION)/gc.tar.gz
+GC_TAR = /tmp/gc.tar.gz
+GC_DIR = /tmp/gc
+GC_PATH = -I$(GC_DIR)/usr/include -L$(GC_DIR)/usr/lib
+
 .PHONY : default submodule build_container deps manual container deps build version push local
 
 default: submodule container
@@ -91,12 +97,17 @@ deps:
 	mkdir $(GUILE_DIR)
 	curl -sLo $(GUILE_TAR) $(GUILE_URL)
 	tar -x -C $(GUILE_DIR) -f $(GUILE_TAR)
+	rm -rf $(GC_DIR) $(GC_TAR)
+	mkdir $(GC_DIR)
+	curl -sLo $(GC_TAR) $(GC_URL)
+	tar -x -C $(GC_DIR) -f $(GC_TAR)
+	rm /tmp/gc/usr/lib/libgc.la
 
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && make autoreconf
-	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
+	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
 	cd $(BUILD_DIR) && make
 	cd $(BUILD_DIR) && make DESTDIR=$(RELEASE_DIR) install
 	rm -rf $(RELEASE_DIR)/tmp
