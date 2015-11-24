@@ -5,7 +5,7 @@ BUILD_DIR = /tmp/$(PACKAGE)-build
 RELEASE_DIR = /tmp/$(PACKAGE)-release
 RELEASE_FILE = /tmp/$(PACKAGE).tar.gz
 PATH_FLAGS = --prefix=/usr --infodir=/tmp/trash
-CONF_FLAGS = --without-idn --disable-shared --disable-local-libopts
+CONF_FLAGS = --without-idn --disable-shared --disable-local-libopts --enable-guile --with-guile-site-dir=no
 CFLAGS = -static -static-libgcc -Wl,-static
 
 PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/gnutls_//;s/_/./g')
@@ -42,6 +42,12 @@ P11-KIT_URL = https://github.com/amylum/p11-kit/releases/download/$(P11-KIT_VERS
 P11-KIT_TAR = /tmp/p11-kit.tar.gz
 P11-KIT_DIR = /tmp/p11-kit
 P11-KIT_PATH = -I$(P11-KIT_DIR)/usr/include -L$(P11-KIT_DIR)/usr/lib -lpthread -ldl
+
+GUILE_VERSION = 2.0.11-2
+GUILE_URL = https://github.com/amylum/guile/releases/download/$(GUILE_VERSION)/guile.tar.gz
+GUILE_TAR = /tmp/guile.tar.gz
+GUILE_DIR = /tmp/guile
+GUILE_PATH = -I$(GUILE_DIR)/usr/include -L$(GUILE_DIR)/usr/lib
 
 .PHONY : default submodule build_container deps manual container deps build version push local
 
@@ -81,12 +87,16 @@ deps:
 	mkdir $(P11-KIT_DIR)
 	curl -sLo $(P11-KIT_TAR) $(P11-KIT_URL)
 	tar -x -C $(P11-KIT_DIR) -f $(P11-KIT_TAR)
+	rm -rf $(GUILE_DIR) $(GUILE_TAR)
+	mkdir $(GUILE_DIR)
+	curl -sLo $(GUILE_TAR) $(GUILE_URL)
+	tar -x -C $(GUILE_DIR) -f $(GUILE_TAR)
 
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && make autoreconf
-	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
+	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
 	cd $(BUILD_DIR) && make
 	cd $(BUILD_DIR) && make DESTDIR=$(RELEASE_DIR) install
 	rm -rf $(RELEASE_DIR)/tmp
