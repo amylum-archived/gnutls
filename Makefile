@@ -12,6 +12,10 @@ PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/gnutls
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
+SOURCE_URL = https://ftp.gnutls.org/gcrypt/gnutls/v3.4/$(PACKAGE)-$(PACKAGE_VERSION).tar.xz
+SOURCE_PATH = /tmp/source
+SOURCE_TARBALL = /tmp/source.tar.gz
+
 GMP_VERSION = 6.1.0-1
 GMP_URL = https://github.com/amylum/gmp/releases/download/$(GMP_VERSION)/gmp.tar.gz
 GMP_TAR = /tmp/gmp.tar.gz
@@ -80,7 +84,7 @@ ZLIB_PATH = -I$(ZLIB_DIR)/usr/include -L$(ZLIB_DIR)/usr/lib
 
 export PATH := $(AUTOGEN_DIR)/usr/bin:$(GUILE_DIR)/usr/bin:$(PATH)
 
-.PHONY : default submodule build_container deps manual container deps build version push local
+.PHONY : default submodule build_container source deps manual container deps build version push local
 
 default: submodule container
 
@@ -95,6 +99,12 @@ manual: submodule build_container
 
 container: build_container
 	./meta/launch
+
+source:
+	rm -rf $(SOURCE_PATH) $(SOURCE_TARBALL)
+	mkdir $(SOURCE_PATH)
+	curl -sLo $(SOURCE_TARBALL) $(SOURCE_URL)
+	tar -x -C $(SOURCE_PATH) -f $(SOURCE_TARBALL) --strip-components=1
 
 deps:
 	rm -rf $(GMP_DIR) $(GMP_TAR)
@@ -147,7 +157,7 @@ deps:
 
 build: submodule deps
 	rm -rf $(BUILD_DIR)
-	cp -R upstream $(BUILD_DIR)
+	cp -R $(SOURCE_PATH) $(BUILD_DIR)
 	echo "echo -n '$(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH) $(LIBTOOL_PATH) $(ZLIB_PATH) -lltdl -ldl -lgc -lunistring -lgmp -lffi -lz'" > $(GUILE_DIR)/usr/bin/guile-config
 	cd $(BUILD_DIR) && make autoreconf
 	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' LIBS='-lunistring -lgmp -lffi' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH) $(LIBTOOL_PATH) $(ZLIB_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
