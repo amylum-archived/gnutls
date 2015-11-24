@@ -61,6 +61,12 @@ LIBUNISTRING_TAR = /tmp/libunistring.tar.gz
 LIBUNISTRING_DIR = /tmp/libunistring
 LIBUNISTRING_PATH = -I$(LIBUNISTRING_DIR)/usr/include -L$(LIBUNISTRING_DIR)/usr/lib
 
+LIBFFI_VERSION = 3.2.1-1
+LIBFFI_URL = https://github.com/amylum/libffi/releases/download/$(LIBFFI_VERSION)/libffi.tar.gz
+LIBFFI_TAR = /tmp/libffi.tar.gz
+LIBFFI_DIR = /tmp/libffi
+LIBFFI_PATH = -I$(LIBFFI_DIR)/usr/include -L$(LIBFFI_DIR)/usr/lib
+
 .PHONY : default submodule build_container deps manual container deps build version push local
 
 default: submodule container
@@ -112,12 +118,16 @@ deps:
 	mkdir $(LIBUNISTRING_DIR)
 	curl -sLo $(LIBUNISTRING_TAR) $(LIBUNISTRING_URL)
 	tar -x -C $(LIBUNISTRING_DIR) -f $(LIBUNISTRING_TAR)
+	rm -rf $(LIBFFI_DIR) $(LIBFFI_TAR)
+	mkdir $(LIBFFI_DIR)
+	curl -sLo $(LIBFFI_TAR) $(LIBFFI_URL)
+	tar -x -C $(LIBFFI_DIR) -f $(LIBFFI_TAR)
 
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
 	cd $(BUILD_DIR) && make autoreconf
-	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
+	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' LIBS='-lunistring -lgmp -lffi' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
 	cd $(BUILD_DIR) && make
 	cd $(BUILD_DIR) && make DESTDIR=$(RELEASE_DIR) install
 	rm -rf $(RELEASE_DIR)/tmp
