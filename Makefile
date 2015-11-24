@@ -138,6 +138,7 @@ deps:
 build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R upstream $(BUILD_DIR)
+	echo "echo -n '$(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH) $(LIBTOOL_PATH) -lltdl -ldl -lgc -lunistring -lgmp -lffi'" > $(GUILE_DIR)/usr/bin/guile-config
 	cd $(BUILD_DIR) && make autoreconf
 	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' LIBS='-lunistring -lgmp -lffi' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH) $(LIBTOOL_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
 	cd $(BUILD_DIR) && make
