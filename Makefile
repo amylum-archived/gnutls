@@ -40,7 +40,7 @@ AUTOGEN_TAR = /tmp/autogen.tar.gz
 AUTOGEN_DIR = /tmp/autogen
 AUTOGEN_PATH = -I$(AUTOGEN_DIR)/usr/include -L$(AUTOGEN_DIR)/usr/lib
 
-P11-KIT_VERSION = 0.23.1-1
+P11-KIT_VERSION = 0.23.1-2
 P11-KIT_URL = https://github.com/amylum/p11-kit/releases/download/$(P11-KIT_VERSION)/p11-kit.tar.gz
 P11-KIT_TAR = /tmp/p11-kit.tar.gz
 P11-KIT_DIR = /tmp/p11-kit
