@@ -64,7 +64,7 @@ LIBUNISTRING_TAR = /tmp/libunistring.tar.gz
 LIBUNISTRING_DIR = /tmp/libunistring
 LIBUNISTRING_PATH = -I$(LIBUNISTRING_DIR)/usr/include -L$(LIBUNISTRING_DIR)/usr/lib
 
-LIBFFI_VERSION = 3.2.1-1
+LIBFFI_VERSION = 3.2.1-2
 LIBFFI_URL = https://github.com/amylum/libffi/releases/download/$(LIBFFI_VERSION)/libffi.tar.gz
 LIBFFI_TAR = /tmp/libffi.tar.gz
 LIBFFI_DIR = /tmp/libffi
