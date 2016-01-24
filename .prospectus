@@ -1,8 +1,7 @@
 item do
   expected do
-    url_xpath
-    url 'https://gitlab.com/gnutls/gnutls/tags'
-    xpath '//ul[@class="content-list"]/li[1]/div[1]/a/strong/text()'
+    gitlab_tag
+    repo 'gnutls/gnutls'
     regex /^gnutls_(\d+)_(\d+)_(\d+)$/, '\1.\2.\3'
   end
 
