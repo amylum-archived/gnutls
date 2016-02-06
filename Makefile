@@ -22,7 +22,7 @@ GMP_TAR = /tmp/gmp.tar.gz
 GMP_DIR = /tmp/gmp
 GMP_PATH = -I$(GMP_DIR)/usr/include -L$(GMP_DIR)/usr/lib
 
-NETTLE_VERSION = 3.1.1-2
+NETTLE_VERSION = 3.2-3
 NETTLE_URL = https://github.com/amylum/nettle/releases/download/$(NETTLE_VERSION)/nettle.tar.gz
 NETTLE_TAR = /tmp/nettle.tar.gz
 NETTLE_DIR = /tmp/nettle
