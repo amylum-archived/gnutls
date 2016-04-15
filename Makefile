@@ -5,8 +5,8 @@ BUILD_DIR = /tmp/$(PACKAGE)-build
 RELEASE_DIR = /tmp/$(PACKAGE)-release
 RELEASE_FILE = /tmp/$(PACKAGE).tar.gz
 PATH_FLAGS = --prefix=/usr --infodir=/tmp/trash
-CONF_FLAGS = --without-idn --disable-shared --disable-local-libopts --enable-guile --with-guile-site-dir=no --with-zlib --with-libz-prefix=/tmp/zlib/usr
-CFLAGS = -static -static-libgcc -Wl,-static
+CONF_FLAGS = --without-idn --disable-local-libopts --enable-guile --with-guile-site-dir=no --with-zlib --with-libz-prefix=/tmp/zlib/usr
+CFLAGS =
 
 PACKAGE_VERSION = 3.4.11
 PATCH_VERSION = $$(cat version)
