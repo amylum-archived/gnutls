@@ -8,7 +8,7 @@ PATH_FLAGS = --prefix=/usr --infodir=/tmp/trash
 CONF_FLAGS = --without-idn --disable-local-libopts --enable-guile --with-guile-site-dir=no --with-zlib --with-libz-prefix=/tmp/zlib/usr
 CFLAGS =
 
-PACKAGE_VERSION = 3.4.11
+PACKAGE_VERSION = 3.4.12
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
@@ -16,19 +16,19 @@ SOURCE_URL = ftp://ftp.gnutls.org/gcrypt/gnutls/v3.4/$(PACKAGE)-$(PACKAGE_VERSIO
 SOURCE_PATH = /tmp/source
 SOURCE_TARBALL = /tmp/source.tar.gz
 
-GMP_VERSION = 6.1.0-2
+GMP_VERSION = 6.1.0-3
 GMP_URL = https://github.com/amylum/gmp/releases/download/$(GMP_VERSION)/gmp.tar.gz
 GMP_TAR = /tmp/gmp.tar.gz
 GMP_DIR = /tmp/gmp
 GMP_PATH = -I$(GMP_DIR)/usr/include -L$(GMP_DIR)/usr/lib
 
-NETTLE_VERSION = 3.2-3
+NETTLE_VERSION = 3.2-4
 NETTLE_URL = https://github.com/amylum/nettle/releases/download/$(NETTLE_VERSION)/nettle.tar.gz
 NETTLE_TAR = /tmp/nettle.tar.gz
 NETTLE_DIR = /tmp/nettle
 NETTLE_PATH = -I$(NETTLE_DIR)/usr/include -L$(NETTLE_DIR)/usr/lib
 
-LIBTASN1_VERSION = 4.7-2
+LIBTASN1_VERSION = 4.8-4
 LIBTASN1_URL = https://github.com/amylum/libtasn1/releases/download/$(LIBTASN1_VERSION)/libtasn1.tar.gz
 LIBTASN1_TAR = /tmp/libtasn1.tar.gz
 LIBTASN1_DIR = /tmp/libtasn1
@@ -40,7 +40,7 @@ AUTOGEN_TAR = /tmp/autogen.tar.gz
 AUTOGEN_DIR = /tmp/autogen
 AUTOGEN_PATH = -I$(AUTOGEN_DIR)/usr/include -L$(AUTOGEN_DIR)/usr/lib
 
-P11-KIT_VERSION = 0.23.1-3
+P11-KIT_VERSION = 0.23.1-4
 P11-KIT_URL = https://github.com/amylum/p11-kit/releases/download/$(P11-KIT_VERSION)/p11-kit.tar.gz
 P11-KIT_TAR = /tmp/p11-kit.tar.gz
 P11-KIT_DIR = /tmp/p11-kit
@@ -52,31 +52,31 @@ GUILE_TAR = /tmp/guile.tar.gz
 GUILE_DIR = /tmp/guile
 GUILE_PATH = -I$(GUILE_DIR)/usr/include/guile/2.0 -L$(GUILE_DIR)/usr/lib -lguile-2.0
 
-GC_VERSION = 7.4.2-2
+GC_VERSION = 7.4.2-3
 GC_URL = https://github.com/amylum/gc/releases/download/$(GC_VERSION)/gc.tar.gz
 GC_TAR = /tmp/gc.tar.gz
 GC_DIR = /tmp/gc
 GC_PATH = -I$(GC_DIR)/usr/include -L$(GC_DIR)/usr/lib
 
-LIBUNISTRING_VERSION = 0.9.6-1
+LIBUNISTRING_VERSION = 0.9.6-2
 LIBUNISTRING_URL = https://github.com/amylum/libunistring/releases/download/$(LIBUNISTRING_VERSION)/libunistring.tar.gz
 LIBUNISTRING_TAR = /tmp/libunistring.tar.gz
 LIBUNISTRING_DIR = /tmp/libunistring
 LIBUNISTRING_PATH = -I$(LIBUNISTRING_DIR)/usr/include -L$(LIBUNISTRING_DIR)/usr/lib
 
-LIBFFI_VERSION = 3.2.1-2
+LIBFFI_VERSION = 3.2.1-3
 LIBFFI_URL = https://github.com/amylum/libffi/releases/download/$(LIBFFI_VERSION)/libffi.tar.gz
 LIBFFI_TAR = /tmp/libffi.tar.gz
 LIBFFI_DIR = /tmp/libffi
 LIBFFI_PATH = -I$(LIBFFI_DIR)/usr/lib/libffi-3.2.1/include -L$(LIBFFI_DIR)/usr/lib
 
-LIBTOOL_VERSION = 2.4.6-1
+LIBTOOL_VERSION = 2.4.6-2
 LIBTOOL_URL = https://github.com/amylum/libtool/releases/download/$(LIBTOOL_VERSION)/libtool.tar.gz
 LIBTOOL_TAR = /tmp/libtool.tar.gz
 LIBTOOL_DIR = /tmp/libtool
 LIBTOOL_PATH = -I$(LIBTOOL_DIR)/usr/include -L$(LIBTOOL_DIR)/usr/lib
 
-ZLIB_VERSION = 1.2.8-2
+ZLIB_VERSION = 1.2.8-4
 ZLIB_URL = https://github.com/amylum/zlib/releases/download/$(ZLIB_VERSION)/zlib.tar.gz
 ZLIB_TAR = /tmp/zlib.tar.gz
 ZLIB_DIR = /tmp/zlib
