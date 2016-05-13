@@ -8,7 +8,7 @@ PATH_FLAGS = --prefix=/usr --infodir=/tmp/trash
 CONF_FLAGS = --without-idn --disable-local-libopts --enable-guile --with-guile-site-dir=no --with-zlib --with-libz-prefix=/tmp/zlib/usr
 CFLAGS =
 
-PACKAGE_VERSION = 3.4.12
+PACKAGE_VERSION = 3.5.0
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
 
