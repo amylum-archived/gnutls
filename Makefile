@@ -16,7 +16,7 @@ SOURCE_URL = ftp://ftp.gnutls.org/gcrypt/gnutls/v3.5/$(PACKAGE)-$(PACKAGE_VERSIO
 SOURCE_PATH = /tmp/source
 SOURCE_TARBALL = /tmp/source.tar.gz
 
-GMP_VERSION = 6.1.0-3
+GMP_VERSION = 6.1.1-4
 GMP_URL = https://github.com/amylum/gmp/releases/download/$(GMP_VERSION)/gmp.tar.gz
 GMP_TAR = /tmp/gmp.tar.gz
 GMP_DIR = /tmp/gmp
@@ -52,7 +52,7 @@ GUILE_TAR = /tmp/guile.tar.gz
 GUILE_DIR = /tmp/guile
 GUILE_PATH = -I$(GUILE_DIR)/usr/include/guile/2.0 -L$(GUILE_DIR)/usr/lib -lguile-2.0
 
-GC_VERSION = 7.4.2-3
+GC_VERSION = 7.4.2-4
 GC_URL = https://github.com/amylum/gc/releases/download/$(GC_VERSION)/gc.tar.gz
 GC_TAR = /tmp/gc.tar.gz
 GC_DIR = /tmp/gc
