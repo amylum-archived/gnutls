@@ -1,8 +1,9 @@
 item do
   expected do
-    gitlab_tag
-    repo 'gnutls/gnutls'
-    regex /^gnutls_(\d+)_(\d+)_(\d+)$/, '\1.\2.\3'
+    url_xpath
+    url 'https://www.archlinux.org/packages/extra/x86_64/gnutls/'
+    xpath '//*[@id="pkgdetails"]/h2'
+    regex /^gnutls ([\w.]*)-\d+$/
   end
 
   actual do
