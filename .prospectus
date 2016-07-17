@@ -1,7 +1,7 @@
 item do
   expected do
     url_xpath
-    url 'https://www.archlinux.org/packages/extra/x86_64/gnutls/'
+    url 'https://www.archlinux.org/packages/core/x86_64/gnutls/'
     xpath '//*[@id="pkgdetails"]/h2'
     regex /^gnutls ([\w.]*)-\d+$/
   end
