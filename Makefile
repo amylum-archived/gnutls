@@ -8,13 +8,9 @@ PATH_FLAGS = --prefix=/usr --infodir=/tmp/trash
 CONF_FLAGS = --without-idn --disable-local-libopts --enable-guile --with-guile-site-dir=no --with-zlib --with-libz-prefix=/tmp/zlib/usr
 CFLAGS =
 
-PACKAGE_VERSION = 3.4.14
+PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/gnutls_//;s/_/./g')
 PATCH_VERSION = $$(cat version)
 VERSION = $(PACKAGE_VERSION)-$(PATCH_VERSION)
-
-SOURCE_URL = ftp://ftp.gnutls.org/gcrypt/gnutls/v3.5/$(PACKAGE)-$(PACKAGE_VERSION).tar.xz
-SOURCE_PATH = /tmp/source
-SOURCE_TARBALL = /tmp/source.tar.gz
 
 GMP_VERSION = 6.1.1-4
 GMP_URL = https://github.com/amylum/gmp/releases/download/$(GMP_VERSION)/gmp.tar.gz
@@ -84,7 +80,7 @@ ZLIB_PATH = -I$(ZLIB_DIR)/usr/include -L$(ZLIB_DIR)/usr/lib
 
 export PATH := $(AUTOGEN_DIR)/usr/bin:$(GUILE_DIR)/usr/bin:$(PATH)
 
-.PHONY : default build_container source deps manual container deps build version push local
+.PHONY : default build_container submodule deps manual container deps build version push local
 
 default: container
 
@@ -97,11 +93,8 @@ manual: build_container
 container: build_container
 	./meta/launch
 
-source:
-	rm -rf $(SOURCE_PATH) $(SOURCE_TARBALL)
-	mkdir $(SOURCE_PATH)
-	curl -sLo $(SOURCE_TARBALL) $(SOURCE_URL)
-	tar -x -C $(SOURCE_PATH) -f $(SOURCE_TARBALL) --strip-components=1
+submodule:
+	git submodule update --init --recursive
 
 deps:
 	rm -rf $(GMP_DIR) $(GMP_TAR)
@@ -152,7 +145,7 @@ deps:
 	curl -sLo $(ZLIB_TAR) $(ZLIB_URL)
 	tar -x -C $(ZLIB_DIR) -f $(ZLIB_TAR)
 
-build: source deps
+build: submodule deps
 	rm -rf $(BUILD_DIR)
 	cp -R $(SOURCE_PATH) $(BUILD_DIR)
 	echo "echo -n '$(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH) $(LIBTOOL_PATH) $(ZLIB_PATH) -lltdl -ldl -lgc -lunistring -lgmp -lffi -lz'" > $(GUILE_DIR)/usr/bin/guile-config
