@@ -5,7 +5,7 @@ BUILD_DIR = /tmp/$(PACKAGE)-build
 RELEASE_DIR = /tmp/$(PACKAGE)-release
 RELEASE_FILE = /tmp/$(PACKAGE).tar.gz
 PATH_FLAGS = --prefix=/usr --infodir=/tmp/trash
-CONF_FLAGS = --without-idn --disable-local-libopts --enable-guile --with-guile-site-dir=no --with-zlib --with-libz-prefix=/tmp/zlib/usr
+CONF_FLAGS = --without-idn --disable-local-libopts --enable-guile --with-guile-site-dir=no --with-zlib --with-libz-prefix=/tmp/zlib/usr --host=x86_64-unknown-linux-gnu
 CFLAGS =
 
 PACKAGE_VERSION = $$(git --git-dir=upstream/.git describe --tags | sed 's/gnutls_//;s/_/./g')
@@ -94,7 +94,7 @@ container: build_container
 	./meta/launch
 
 submodule:
-	git submodule update --init --recursive
+	git submodule update --init
 
 deps:
 	rm -rf $(GMP_DIR) $(GMP_TAR)
@@ -144,10 +144,16 @@ deps:
 	mkdir $(ZLIB_DIR)
 	curl -sLo $(ZLIB_TAR) $(ZLIB_URL)
 	tar -x -C $(ZLIB_DIR) -f $(ZLIB_TAR)
+	find /tmp -name '*.la' -delete
 
 build: submodule deps
 	rm -rf $(BUILD_DIR)
-	cp -R $(SOURCE_PATH) $(BUILD_DIR)
+	cp -R upstream $(BUILD_DIR)
+	rm -rf $(BUILD_DIR)/.git
+	cp -R .git/modules/upstream $(BUILD_DIR)/.git
+	sed -i '/worktree/d' $(BUILD_DIR)/.git/config
+	cd $(BUILD_DIR) && git submodule update --init
+	make -C $(BUILD_DIR) bootstrap
 	echo "echo -n '$(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH) $(LIBTOOL_PATH) $(ZLIB_PATH) -lltdl -ldl -lgc -lunistring -lgmp -lffi -lz'" > $(GUILE_DIR)/usr/bin/guile-config
 	cd $(BUILD_DIR) && CC=musl-gcc AUTOGEN='autogen -L/tmp/autogen/usr/share/autogen/' LIBS='-lunistring -lgmp -lffi' CFLAGS='$(CFLAGS) $(GMP_PATH) $(NETTLE_PATH) $(LIBTASN1_PATH) $(AUTOGEN_PATH) $(P11-KIT_PATH) $(GUILE_PATH) $(GC_PATH) $(LIBUNISTRING_PATH) $(LIBFFI_PATH) $(LIBTOOL_PATH) $(ZLIB_PATH)' ./configure $(PATH_FLAGS) $(CONF_FLAGS)
 	cd $(BUILD_DIR) && make
