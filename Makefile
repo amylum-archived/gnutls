@@ -42,7 +42,7 @@ P11-KIT_TAR = /tmp/p11-kit.tar.gz
 P11-KIT_DIR = /tmp/p11-kit
 P11-KIT_PATH = -I$(P11-KIT_DIR)/usr/include -L$(P11-KIT_DIR)/usr/lib -lpthread -ldl
 
-GUILE_VERSION = 2.0.11-2
+GUILE_VERSION = 2.0.11-3
 GUILE_URL = https://github.com/amylum/guile/releases/download/$(GUILE_VERSION)/guile.tar.gz
 GUILE_TAR = /tmp/guile.tar.gz
 GUILE_DIR = /tmp/guile
