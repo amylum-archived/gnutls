@@ -24,7 +24,7 @@ NETTLE_TAR = /tmp/nettle.tar.gz
 NETTLE_DIR = /tmp/nettle
 NETTLE_PATH = -I$(NETTLE_DIR)/usr/include -L$(NETTLE_DIR)/usr/lib
 
-LIBTASN1_VERSION = 4.8-4
+LIBTASN1_VERSION = 4.9-5
 LIBTASN1_URL = https://github.com/amylum/libtasn1/releases/download/$(LIBTASN1_VERSION)/libtasn1.tar.gz
 LIBTASN1_TAR = /tmp/libtasn1.tar.gz
 LIBTASN1_DIR = /tmp/libtasn1
@@ -36,7 +36,7 @@ AUTOGEN_TAR = /tmp/autogen.tar.gz
 AUTOGEN_DIR = /tmp/autogen
 AUTOGEN_PATH = -I$(AUTOGEN_DIR)/usr/include -L$(AUTOGEN_DIR)/usr/lib
 
-P11-KIT_VERSION = 0.23.1-4
+P11-KIT_VERSION = 0.23.1-5
 P11-KIT_URL = https://github.com/amylum/p11-kit/releases/download/$(P11-KIT_VERSION)/p11-kit.tar.gz
 P11-KIT_TAR = /tmp/p11-kit.tar.gz
 P11-KIT_DIR = /tmp/p11-kit
