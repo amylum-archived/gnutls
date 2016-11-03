@@ -14,7 +14,8 @@ deps(
   libunistring: '0.9.6-2',
   libffi: '3.2.1-4',
   libtool: '2.4.6-2',
-  zlib: '1.2.8-4'
+  zlib: '1.2.8-4',
+  libidn: '1.33-2'
 )
 
 configure_flags(
