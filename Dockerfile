@@ -1,2 +1,2 @@
 FROM dock0/pkgforge
-RUN pacman -S --needed --noconfirm gperf
+RUN pacman -S --needed --noconfirm gperf autogen
