@@ -20,10 +20,12 @@ deps(
 
 configure_flags(
   prefix: '/usr',
+  'disable-rpath': nil,
   'enable-guile': nil,
   'with-guile-site-dir': 'no',
   'with-zlib': nil,
   'with-libz-prefix': "#{dep(:zlib)}/usr",
+  build: 'x86_64-pc-linux-gnu',
   host: 'x86_64-unknown-linux-gnu'
 )
 remove_linker_archives
