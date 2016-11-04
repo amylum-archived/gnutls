@@ -33,6 +33,7 @@ cflags
 harden
 
 build do
+  run "ln -s #{dep(:libffi)}/usr/lib/libffi-3.2.1/include/ #{dep(:libffi)}/usr/include"
   run 'make bootstrap'
   configure
   make
