@@ -1,4 +1,4 @@
-oname 'gnutls'
+name 'gnutls'
 org 'amylum'
 
 licenses 'COPYING'
