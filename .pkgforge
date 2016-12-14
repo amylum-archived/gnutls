@@ -1,4 +1,4 @@
-name 'gnutls'
+oname 'gnutls'
 org 'amylum'
 
 licenses 'COPYING'
@@ -10,7 +10,7 @@ deps(
   autogen: '5.18.12-4',
   'p11-kit': '0.23.2-6',
   guile: '2.0.11-3',
-  gc: '7.6.0-11',
+  gc: '7.6.0-12',
   libunistring: '0.9.7-1',
   libffi: '3.2.1-4',
   libtool: '2.4.6-2',
