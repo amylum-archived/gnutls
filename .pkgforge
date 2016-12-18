@@ -4,7 +4,7 @@ org 'amylum'
 licenses 'COPYING'
 
 deps(
-  gmp: '6.1.1-4',
+  gmp: '6.1.2-1',
   nettle: '3.3-5',
   libtasn1: '4.9-5',
   autogen: '5.18.12-5',
