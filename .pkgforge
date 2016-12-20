@@ -5,11 +5,11 @@ licenses 'COPYING'
 
 deps(
   gmp: '6.1.2-1',
-  nettle: '3.3-5',
+  nettle: '3.3-6',
   libtasn1: '4.9-5',
-  autogen: '5.18.12-5',
+  autogen: '5.18.12-6',
   'p11-kit': '0.23.2-6',
-  guile: '2.0.11-3',
+  guile: '2.0.13-1',
   gc: '7.6.0-12',
   libunistring: '0.9.7-1',
   libffi: '3.2.1-4',
