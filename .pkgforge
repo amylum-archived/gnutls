@@ -14,7 +14,7 @@ deps(
   libunistring: '0.9.7-1',
   libffi: '3.2.1-4',
   libtool: '2.4.6-2',
-  zlib: '1.2.8-4',
+  zlib: '1.2.9-1',
   libidn: '1.33-2'
 )
 
@@ -39,7 +39,7 @@ build do
   run "ln -s #{dep(:libffi)}/usr/lib/libffi-3.2.1/include/ #{dep(:libffi)}/usr/include"
   run 'make bootstrap'
   configure
-  make
+  make 'LD_LIBRARY_PATH' => @forge.deps.keys.map { |x| dep(x) + '/usr/lib' }.join(':')
   install
 end
 
