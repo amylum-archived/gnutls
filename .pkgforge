@@ -14,7 +14,7 @@ deps(
   libunistring: '0.9.7-1',
   libffi: '3.2.1-4',
   libtool: '2.4.6-2',
-  zlib: '1.2.10-1',
+  zlib: '1.2.11-1',
   libidn: '1.33-2'
 )
 
