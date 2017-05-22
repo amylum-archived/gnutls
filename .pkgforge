@@ -9,7 +9,7 @@ deps(
   libtasn1: '4.9-5',
   autogen: '5.18.12-11',
   'p11-kit': '0.23.2-6',
-  guile: '2.0.14-1',
+  guile: '2.2.2-1',
   gc: '7.6.0-17',
   libunistring: '0.9.7-1',
   libffi: '3.2.1-4',
