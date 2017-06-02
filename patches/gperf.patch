@@ -1,0 +1,11 @@
+diff --git a/lib/priority_options.gperf b/lib/priority_options.gperf
+index 56c79988f..2484bda64 100644
+--- a/lib/priority_options.gperf
++++ b/lib/priority_options.gperf
+@@ -1,6 +1,5 @@
+ %{
+ typedef void (*option_set_func)(gnutls_priority_t);
+-static const struct priority_options_st *in_word_set(register const char *str, register unsigned int len);
+ %}
+ %language=ANSI-C
+ %readonly-tables
