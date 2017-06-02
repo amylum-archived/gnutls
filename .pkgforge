@@ -42,7 +42,7 @@ build do
   run "ln -s #{dep(:libffi)}/usr/lib/libffi-3.2.1/include/ #{dep(:libffi)}/usr/include"
   run 'make bootstrap'
   configure
-  make
+  make 'LD_LIBRARY_PATH' => @forge.deps.keys.map { |x| dep(x) + '/usr/lib' }.join(':') + ':/usr/lib'
   install
 end
 
