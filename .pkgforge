@@ -1,8 +1,6 @@
 name 'gnutls'
 org 'amylum'
 
-licenses 'COPYING'
-
 deps(
   gmp: '6.1.2-1',
   nettle: '3.3-6',
