@@ -57,7 +57,6 @@ patch 'gperf.patch'
 configure_flags(
   prefix: '/usr',
   'disable-rpath': nil,
-  'disable-doc': nil,
   'disable-cxx': nil,
   'enable-guile': nil,
   'with-guile-site-dir': 'no',
