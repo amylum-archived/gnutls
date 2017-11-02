@@ -52,8 +52,6 @@ deps(
   }
 )
 
-patch 'gperf.patch'
-
 configure_flags(
   prefix: '/usr',
   'disable-rpath': nil,
