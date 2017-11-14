@@ -15,8 +15,8 @@ deps(
     checksum: '4396d9f56ebabf1f433abc027541e13bccd393dda871633046bde6e646c62749'
   },
   autogen: {
-    version: '5.18.12-18',
-    checksum: '5ef01561593aeb7af66c9976e257c9d627db34bee75e0711a9edcc1d182f5890'
+    version: '5.18.12-19',
+    checksum: '80a6be6ac18779b09f13e8b0220dd2bc25fdc7828c045b32b61d10a4187058f6'
   },
   'p11-kit': {
     version: '0.23.2-7',
