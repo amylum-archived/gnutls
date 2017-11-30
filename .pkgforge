@@ -15,8 +15,8 @@ deps(
     checksum: '4396d9f56ebabf1f433abc027541e13bccd393dda871633046bde6e646c62749'
   },
   autogen: {
-    version: '5.18.12-20',
-    checksum: '9d6bd0b6723932e50bd15506431fae05e64a46398f81a19ce24699681d43e9e2'
+    version: '5.18.12-21',
+    checksum: '46ac6734d230da9a504d4f186e25d63176d22c3ee93f3a82165d4b739de70a68'
   },
   'p11-kit': {
     version: '0.23.2-8',
@@ -31,8 +31,8 @@ deps(
     checksum: '9ad3c4754762baea414ed68c8fa14bf7171f860a5c72a2e9cc6a887983f7ffc9'
   },
   libunistring: {
-    version: '0.9.7-1',
-    checksum: 'e3a70df2de3dfbcaae3c1dc01b1ede76bff031e9628e7fbbb4856f39dd0b3447'
+    version: '0.9.8-1',
+    checksum: '7e21962ecf63c4f12a227c92a5ae6541078c33732581d68179dc343893bf3d86'
   },
   libffi: {
     version: '3.2.1-4',
