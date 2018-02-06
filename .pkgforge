@@ -15,16 +15,16 @@ deps(
     checksum: 'fd245952c05c8d3b7fd5b56c920c05c91e9e05a5aec9f83eb109d21d15684345'
   },
   autogen: {
-    version: '5.18.12-25',
-    checksum: 'a13a03a9fe2e5f844b7cd5375554375c366417694a4fd68fe6958fb0efe01aab'
+    version: '5.18.12-26',
+    checksum: '65686b0f0814b169cd09bf7a6d0e2cf2fac3d41538c97ad9d93a830c3d8ed2f2'
   },
   'p11-kit': {
     version: '0.23.2-9',
     checksum: '13f3746ef9ede35321b7b1f96726734dd255c65c69dab24b50f90878035ba937'
   },
   guile: {
-    version: '2.2.3-3',
-    checksum: '6e21afdbc6f517a54ce116907b490bdbbd91101360769c3fc5485e2725dc5f40'
+    version: '2.2.3-4',
+    checksum: '0e79bc63a8c3b0094685c5a09a87b181efb7ba8ce2b5fb1a6edf92f6e21e5ba3'
   },
   gc: {
     version: '7.6.0-24',
