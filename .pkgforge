@@ -31,8 +31,8 @@ deps(
     checksum: 'f48d9276dafc6b661a4520072017ba036c74d5c69b16da9ac7a1b13e7a7bad07'
   },
   libunistring: {
-    version: '0.9.8-1',
-    checksum: '7e21962ecf63c4f12a227c92a5ae6541078c33732581d68179dc343893bf3d86'
+    version: '0.9.9-1',
+    checksum: 'd31eb1193caf41d9bd9f27e92ef1ecdddcac0fb6de51ae2eb00b0c1c806cb6f1'
   },
   libffi: {
     version: '3.2.1-4',
