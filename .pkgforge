@@ -47,8 +47,8 @@ deps(
     checksum: '5596e2d39ef98e2323ac415f50afa71a433ed65c23e8d1f2723f711f5ffb4f32'
   },
   libidn: {
-    version: '1.33-2',
-    checksum: '8320beb19563e507acf2e2e79adb5bfcbcefcb0c5a29a21c9fd288323e0087da'
+    version: '1.34-1',
+    checksum: 'b3695d64e07ae096087b0cfeeac8e509bbd656fd360790006731de22f55770bd'
   }
 )
 
