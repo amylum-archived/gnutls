@@ -15,20 +15,20 @@ deps(
     checksum: 'fd245952c05c8d3b7fd5b56c920c05c91e9e05a5aec9f83eb109d21d15684345'
   },
   autogen: {
-    version: '5.18.12-32',
-    checksum: 'a57f37bb7500b655c8f4d7d1bed4bc6c4861207b64c8fff4b115426e73539194'
+    version: '5.18.12-33',
+    checksum: 'b893f56aa6c14d3ea4c2889064789c7409c1a18b62b20c8be45b1e2a03a2c21e'
   },
   'p11-kit': {
     version: '0.23.2-9',
     checksum: '13f3746ef9ede35321b7b1f96726734dd255c65c69dab24b50f90878035ba937'
   },
   guile: {
-    version: '2.2.3-8',
-    checksum: 'd074e80a1b758b6c792af7a8f404e3b681f22e7058b000300b84a6348d38a0fc'
+    version: '2.2.3-9',
+    checksum: 'dd4aeb23386b044b4dc0ac89cb280cda696e6128cd93ebf4b6c450c030935674'
   },
   gc: {
-    version: '7.6.4-3',
-    checksum: 'f3e627c15e7133b79ff6abe2f3d262d35f013a8368680129b82e903776f6ac67'
+    version: '7.6.6-1',
+    checksum: '544c9cc32365d43c3536e02061e98a00831bff889dca56fd1fca76abeeed3a62'
   },
   libunistring: {
     version: '0.9.9-1',
