@@ -19,8 +19,8 @@ deps(
     checksum: 'b893f56aa6c14d3ea4c2889064789c7409c1a18b62b20c8be45b1e2a03a2c21e'
   },
   'p11-kit': {
-    version: '0.23.2-9',
-    checksum: '13f3746ef9ede35321b7b1f96726734dd255c65c69dab24b50f90878035ba937'
+    version: '0.23.11-1',
+    checksum: '15b0fb2d10e25ab632dacf2da5240606bff6e3b645c971e8003a9d5ef9d3f18c'
   },
   guile: {
     version: '2.2.3-9',
