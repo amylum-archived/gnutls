@@ -19,16 +19,16 @@ deps(
     checksum: 'c814e5692d377d3028d1112281ab82e79afe89f3cacbacc2134a9683e33dcc53'
   },
   'p11-kit': {
-    version: '0.23.12-1',
-    checksum: '7a206a410bac6a5203ebb50a8750910c256aab80c10150ce730a5faad57042e5'
+    version: '0.23.13-1',
+    checksum: 'e1cd0c72731ca6c72e951426a312404336b8bb2d8b947ce0db6bba9780940cdd'
   },
   guile: {
-    version: '2.2.4-1',
-    checksum: '3c8dd9d020708b625c2d93912516394ec192891d7fca28af5093de4628b18b8f'
+    version: '2.2.4-2',
+    checksum: 'a806e27ba0eabb10c74377860f417a0585644b1b6dd29770d2ae7f0ebda30969'
   },
   gc: {
-    version: '7.6.6-2',
-    checksum: 'd920b7489e90402f56cde76f859487bde48b9aeadfbe0416869141fd5edf8741'
+    version: '7.6.8-1',
+    checksum: '2387deb91a737f991c0c2f8bbac8e00e2cd79f22c666c2449e3ab27a2219a105'
   },
   libunistring: {
     version: '0.9.10-1',
