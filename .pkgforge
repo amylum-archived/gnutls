@@ -23,12 +23,12 @@ deps(
     checksum: 'e1cd0c72731ca6c72e951426a312404336b8bb2d8b947ce0db6bba9780940cdd'
   },
   guile: {
-    version: '2.2.4-2',
-    checksum: 'a806e27ba0eabb10c74377860f417a0585644b1b6dd29770d2ae7f0ebda30969'
+    version: '2.2.4-4',
+    checksum: 'd80d2ff1e6de8c18faf07932d626e700067213b742964ec11a2cf3b14110ecc0'
   },
   gc: {
-    version: '7.6.8-1',
-    checksum: '2387deb91a737f991c0c2f8bbac8e00e2cd79f22c666c2449e3ab27a2219a105'
+    version: '7.6.8-2',
+    checksum: 'f5ee3adaef850c6afdc937e3fa6f99c1854be68a3ab02856f5c69a14a9a5e86b'
   },
   libunistring: {
     version: '0.9.10-1',
