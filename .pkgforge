@@ -19,8 +19,8 @@ deps(
     checksum: 'c814e5692d377d3028d1112281ab82e79afe89f3cacbacc2134a9683e33dcc53'
   },
   'p11-kit': {
-    version: '0.23.13-1',
-    checksum: 'e1cd0c72731ca6c72e951426a312404336b8bb2d8b947ce0db6bba9780940cdd'
+    version: '0.23.14-1',
+    checksum: 'f69d58355abbf861d43e8d0ecf0af645eefda53f15f540c5abdc2facbcf22dca'
   },
   guile: {
     version: '2.2.4-4',
@@ -43,8 +43,8 @@ deps(
     checksum: '5a3a7cd180e16e399501a10cc13da752e4d4e3f86b73ae9afa5ffa9f63b86d3a'
   },
   zlib: {
-    version: '1.2.11-1',
-    checksum: '5596e2d39ef98e2323ac415f50afa71a433ed65c23e8d1f2723f711f5ffb4f32'
+    version: '1.2.11-6',
+    checksum: '7da7212123edac6d5d5dc2db8fb10a6af06472578840c51e489e1f391b66c208'
   },
   libidn: {
     version: '1.35-1',
