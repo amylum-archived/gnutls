@@ -1,0 +1,12 @@
+diff --git a/configure.ac b/configure.ac
+index 0926ed109..bd5234e74 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -867,6 +867,7 @@ if test "$opt_guile_bindings" = "yes"; then
+       AC_PATH_PROG([GUILD], [guild])
+       AC_SUBST([GUILD])
+ 
++      GUILE_PKG(2.2 2.0 1.8)
+       GUILE_PROGS
+       GUILE_FLAGS
+ 

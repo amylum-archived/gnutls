@@ -71,10 +71,12 @@ remove_pkgconfig_files
 cflags
 harden
 
+patch 'guile.patch'
+
 build do
   run "ln -s #{dep(:libffi)}/usr/lib/libffi-3.2.1/include/ #{dep(:libffi)}/usr/include"
   run 'make bootstrap'
-  configure
+  configure 'HOGWEED_LIBS' => '-lhogweed -lnettle -lgmp'
   make
   install
 end
