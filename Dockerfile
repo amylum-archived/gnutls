@@ -1,2 +1,2 @@
 FROM dock0/pkgforge
-RUN pacman -S --needed --noconfirm gperf autogen
+RUN pacman -S --needed --noconfirm gperf autogen rsync wget
