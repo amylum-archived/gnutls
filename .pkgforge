@@ -7,8 +7,8 @@ deps(
     checksum: '12515de758fa11b2b3d87b347d0593fc8bde37b32a6c609cbddd09473e180b08'
   },
   nettle: {
-    version: '3.4-1',
-    checksum: 'e960c73d20806156d7dc3fc604af6d031122efe65f9e5155bfafa9280eaf241b'
+    version: '3.4.1-1',
+    checksum: 'bde793b4551aa928a8fee81e598a18376a7ab157e59e1c17e232d876f1aac4e8'
   },
   libtasn1: {
     version: '4.13-1',
