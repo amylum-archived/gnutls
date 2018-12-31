@@ -27,8 +27,8 @@ deps(
     checksum: 'd80d2ff1e6de8c18faf07932d626e700067213b742964ec11a2cf3b14110ecc0'
   },
   gc: {
-    version: '8.0.0-2',
-    checksum: '53af3434a2a5af169d0f2faf892c5b9ed293c1f13d76db3a9fc0f15343937b65'
+    version: '8.0.2-1',
+    checksum: '72f604fb68a493b8f7294440ab0ec86a0c82b65fcf716f8342a0160743f0c17c'
   },
   libunistring: {
     version: '0.9.10-1',
